@@ -1,10 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <list>
-#include <sstream>
-#include <fstream>
-using namespace std;
 
+#include "listaSasiadow.h"
 
 class macierzSasiedztwa
 {
@@ -13,7 +8,8 @@ private:
 	int krawedzie;
 	vector< vector<int> > macierz;
 public:
-	macierzSasiedztwa();
+	macierzSasiedztwa(int wie, int kra, vector<elListy> dane);
+	void showMatrix();
 	~macierzSasiedztwa();
 };
 

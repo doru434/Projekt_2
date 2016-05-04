@@ -1,4 +1,4 @@
-#include "listaSasiadow.h"
+#include "macierzSasiedztwa.h"
 
 class fileReader
 {

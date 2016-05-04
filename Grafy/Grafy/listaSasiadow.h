@@ -1,4 +1,9 @@
-#include "macierzSasiedztwa.h"
+#include <iostream>
+#include <vector>
+#include <list>
+#include <sstream>
+#include <fstream>
+using namespace std;
 
 struct elListy {
 	int elPoczatkowy;
