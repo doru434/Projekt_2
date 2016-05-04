@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <sstream>
+#include <fstream>
 using namespace std;
+
 
 class macierzSasiedztwa
 {

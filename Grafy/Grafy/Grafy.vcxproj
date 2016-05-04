@@ -146,11 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="fileReader.cpp" />
     <ClCompile Include="listaSasiadow.cpp" />
     <ClCompile Include="macierzSasiedztwa.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="fileReader.h" />
     <ClInclude Include="listaSasiadow.h" />
     <ClInclude Include="macierzSasiedztwa.h" />
   </ItemGroup>
