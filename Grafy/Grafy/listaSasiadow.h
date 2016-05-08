@@ -3,7 +3,10 @@
 #include <list>
 #include <sstream>
 #include <fstream>
+#include <iterator>
 using namespace std;
+
+const int MAXINT = 2147483647;
 
 struct elListy {
 	int elPoczatkowy;
@@ -21,6 +24,7 @@ private:
 public:
 	listaSasiadow(int wie,int kra,vector<elListy> dane);
 	void showElements();
+	void Dijkstra(int startowy);
 	~listaSasiadow();
 };
 

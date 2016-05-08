@@ -57,4 +57,10 @@ void fileReader::file_read_graph(string file_name)
 	}
 	else
 		cout << "File error - OPEN" << endl;
-}void fileReader::start_read(){	cout << "Podaj nazwe pliku" << endl;	cin >> fileName;	file_read_graph(fileName);}
+}
+void fileReader::start_read()
+{
+	cout << "Podaj nazwe pliku" << endl;
+	cin >> fileName;
+	file_read_graph(fileName);
+}

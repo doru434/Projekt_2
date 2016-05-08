@@ -1,5 +1,4 @@
-﻿  macierzSasiedztwa.cpp
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(20): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(27): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(29): warning C4018: '<': signed/unsigned mismatch
-  Grafy.vcxproj -> C:\Users\Zlomek\Desktop\Projekt_2-Grafy\Projekt_2\Grafy\Debug\Grafy.exe
+﻿  listaSasiadow.cpp
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(34): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(101): warning C4018: '<': signed/unsigned mismatch
+  Grafy.vcxproj -> C:\Users\Krzysiek\Desktop\git\Projekt_2\Grafy\Debug\Grafy.exe

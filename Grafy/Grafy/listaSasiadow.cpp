@@ -29,11 +29,11 @@ void listaSasiadow::showElements()
 {
 	for (int i = 0; i < wierzcholki; i++)
 	{
-		bool check;
-		list <elListy> a = tabList.at(i);
-		check = a.empty();
-		if(check==false)
+		cout << "El[" << i << "] = ";
+
+		if(i<tabList.size())
 		{
+			list <elListy> a = tabList.at(i);
 
 			std::list<elListy>::const_iterator l_front = a.begin();
 			std::list<elListy>::const_iterator l_back = a.end();
@@ -54,7 +54,82 @@ void listaSasiadow::showElements()
 		}
 	}
 }
+void listaSasiadow::Dijkstra(int startowy)
+{
+	// Tworzymy tablice dynamiczne
 
+	int *d = new int[wierzcholki];              // Tablica kosztów dojœcia
+	int *p = new int[wierzcholki];              // Tablica poprzedników
+	bool *QS = new bool[wierzcholki];           // Zbiory Q i S
+
+	int *S = new int[wierzcholki];              // Stos
+	int sptr = 0;							    // WskaŸnik stosu
+
+	// Inicjujemy tablice dynamiczne
+
+	for (int i = 0; i < wierzcholki; i++)
+	{
+		d[i] = MAXINT;
+		p[i] = -1;
+		QS[i] = false;
+	}
+
+	d[startowy] = 0;							// Koszt dojœcia v jest zerowy
+
+	// Wyznaczamy œcie¿ki
+
+	for (int i = 0; i < wierzcholki; i++)
+	{
+		elListy pw;
+		int j, u,x=0;
+		
+		// Szukamy wierzcho³ka w Q o najmniejszym koszcie d
+
+		for (j = 0; QS[j]; j++);
+		for (u = j++; j < wierzcholki; j++)
+			if (!QS[j] && (d[j] < d[u])) 
+				u = j;
+
+		// Znaleziony wierzcho³ek przenosimy do S
+
+		QS[u] = true;
+
+		// Modyfikujemy odpowiednio wszystkich s¹siadów u, którzy s¹ w Q
+		
+		list<elListy> temp = tabList.at(u);
+	
+		for (pw = *temp.begin(); x<temp.size();next(&pw,1))
+		{
+			if (!QS[pw.elDocelowy] && (d[pw.elDocelowy] > d[u] + pw.waga))
+			{
+				d[pw.elDocelowy] = d[u] + pw.waga;
+				p[pw.elDocelowy] = u;
+			}
+			x++;
+		}
+	}
+
+	//wyniki
+	for (int i = 0; i < wierzcholki; i++)
+	{
+		cout << i << ": ";
+
+		// Œcie¿kê przechodzimy od koñca ku pocz¹tkowi,
+		// Zapisuj¹c na stosie kolejne wierzcho³ki
+
+		for (int j = i; j > -1; j = p[j]) 
+			S[sptr++] = j;
+
+		// Wyœwietlamy œcie¿kê, pobieraj¹c wierzcho³ki ze stosu
+
+		while (sptr) 
+			cout << S[--sptr] << " ";
+
+		// Na koñcu œcie¿ki wypisujemy jej koszt
+
+		cout << "$" << d[i] << endl;
+	}
+}
 listaSasiadow::~listaSasiadow()
 {
 }
