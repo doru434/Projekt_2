@@ -95,17 +95,18 @@ void listaSasiadow::Dijkstra(int startowy)
 		QS[u] = true;
 
 		// Modyfikujemy odpowiednio wszystkich s¹siadów u, którzy s¹ w Q
-		
-		list<elListy> temp = tabList.at(u);
 	
-		for (pw = *temp.begin(); x<temp.size();next(&pw,1))
+		list<elListy>::iterator ith_iterator = tabList.at(u).begin();
+
+		for (int index = 0; index < tabList.at(u).size(); index++)
 		{
+			advance(ith_iterator, index);
+			elListy& pw = *ith_iterator;
 			if (!QS[pw.elDocelowy] && (d[pw.elDocelowy] > d[u] + pw.waga))
 			{
 				d[pw.elDocelowy] = d[u] + pw.waga;
 				p[pw.elDocelowy] = u;
 			}
-			x++;
 		}
 	}
 
