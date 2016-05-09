@@ -10,6 +10,6 @@ private:
 public:
 	macierzSasiedztwa(int wie, int kra, vector<elListy> dane);
 	void showMatrix();
-	~macierzSasiedztwa();
+	void Dijkstra(int startowy);
 };
 

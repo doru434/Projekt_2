@@ -25,6 +25,6 @@ public:
 	listaSasiadow(int wie,int kra,vector<elListy> dane);
 	void showElements();
 	void Dijkstra(int startowy);
-	~listaSasiadow();
+
 };
 

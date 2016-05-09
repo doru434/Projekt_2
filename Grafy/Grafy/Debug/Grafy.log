@@ -1,5 +1,6 @@
-﻿  listaSasiadow.cpp
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\listasasiadow.cpp(34): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\listasasiadow.cpp(113): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\listasasiadow.cpp(83): warning C4101: 'pw': unreferenced local variable
+﻿  macierzSasiedztwa.cpp
+c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(27): warning C4018: '<': signed/unsigned mismatch
+c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(30): warning C4018: '<': signed/unsigned mismatch
+c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(81): warning C4018: '<': signed/unsigned mismatch
+c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(63): warning C4101: 'pw': unreferenced local variable
   Grafy.vcxproj -> C:\Users\Zlomek\Desktop\Projekt_2-Grafy\Projekt_2\Grafy\Debug\Grafy.exe
