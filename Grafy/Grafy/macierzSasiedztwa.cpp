@@ -21,6 +21,8 @@ macierzSasiedztwa::macierzSasiedztwa(int wie, int kra, vector<elListy> dane)
 	{
 		macierz.at(dane.at(i).elPoczatkowy).at(dane.at(i).elDocelowy) = dane.at(i).waga;
 	}
+	d = new int[wierzcholki];
+	p = new int[wierzcholki]; 
 }
 void macierzSasiedztwa::showMatrix()
 {
@@ -38,25 +40,20 @@ void macierzSasiedztwa::Dijkstra(int startowy)
 {
 	// Tworzymy tablice dynamiczne
 
-	int *d = new int[wierzcholki];              // Tablica kosztów dojœcia
-	int *p = new int[wierzcholki];              // Tablica poprzedników
-	bool *QS = new bool[wierzcholki];           // Zbiory Q i S
+	bool *S = new bool[wierzcholki];           // Zbior S
 
-	int *S = new int[wierzcholki];              // Stos
-	int sptr = 0;							    // WskaŸnik stosu
-
-												// Inicjujemy tablice dynamiczne
+	// Inicjujemy tablice dynamiczne
 
 	for (int i = 0; i < wierzcholki; i++)
 	{
 		d[i] = MAXINT;
 		p[i] = -1;
-		QS[i] = false;
+		S[i] = false;
 	}
 
 	d[startowy] = 0;							// Koszt dojœcia v jest zerowy
 
-												// Wyznaczamy œcie¿ki
+	// Wyznaczamy œcie¿ki
 
 	for (int i = 0; i < wierzcholki; i++)
 	{
@@ -65,14 +62,14 @@ void macierzSasiedztwa::Dijkstra(int startowy)
 
 		// Szukamy wierzcho³ka w Q o najmniejszym koszcie d
 
-		for (j = 0; QS[j]; j++);
+		for (j = 0; S[j]; j++);
 		for (u = j++; j < wierzcholki; j++)
-			if (!QS[j] && (d[j] < d[u]))
+			if (!S[j] && (d[j] < d[u]))
 				u = j;
 
 		// Znaleziony wierzcho³ek przenosimy do S
 
-		QS[u] = true;
+		S[u] = true;
 
 		// Modyfikujemy odpowiednio wszystkich s¹siadów u, którzy s¹ w Q
 
@@ -82,7 +79,7 @@ void macierzSasiedztwa::Dijkstra(int startowy)
 		{
 			if (temp.at(index) != 0)
 			{
-				if (!QS[index] && (d[index] > d[u] + temp.at(index)))
+				if (!S[index] && (d[index] > d[u] + temp.at(index)))
 				{
 					d[index] = d[u] + temp.at(index);
 					p[index] = u;
@@ -91,6 +88,12 @@ void macierzSasiedztwa::Dijkstra(int startowy)
 		}
 		
 	}
+}
+void macierzSasiedztwa::DijkstraShow(int startowy)
+{
+	int *Stos = new int[wierzcholki];              // Stos
+	int sptr = 0;							    // WskaŸnik stosu
+
 	cout << endl << "Start = " << startowy << endl;
 	cout << "End   " << "Dist  " << "Path  " << endl;
 	//wyniki
@@ -102,7 +105,7 @@ void macierzSasiedztwa::Dijkstra(int startowy)
 		// Zapisuj¹c na stosie kolejne wierzcho³ki
 
 		for (int j = i; j > -1; j = p[j])
-			S[sptr++] = j;
+			Stos[sptr++] = j;
 
 		// Wypisujemy jej koszt
 
@@ -110,7 +113,7 @@ void macierzSasiedztwa::Dijkstra(int startowy)
 		// Wyœwietlamy œcie¿kê, pobieraj¹c wierzcho³ki ze stosu
 
 		while (sptr)
-			cout << S[--sptr] << " ";
+			cout << Stos[--sptr] << " ";
 
 		cout << endl;
 	}

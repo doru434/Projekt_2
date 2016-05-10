@@ -19,12 +19,14 @@ class listaSasiadow
 private:	
 	int wierzcholki;
 	int krawedzie;
+	int *d;              // Tablica kosztów dojœcia
+	int *p;              // Tablica poprzedników
 	vector< list<elListy> > tabList;
 
 public:
 	listaSasiadow(int wie,int kra,vector<elListy> dane);
 	void showElements();
 	void Dijkstra(int startowy);
-
+	void DijkstraShow(int startowy);
 };
 

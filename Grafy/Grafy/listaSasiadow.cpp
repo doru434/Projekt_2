@@ -58,12 +58,9 @@ void listaSasiadow::Dijkstra(int startowy)
 {
 	// Tworzymy tablice dynamiczne
 
-	int *d = new int[wierzcholki];              // Tablica kosztów dojœcia
-	int *p = new int[wierzcholki];              // Tablica poprzedników
-	bool *QS = new bool[wierzcholki];           // Zbiory Q i S
-
-	int *S = new int[wierzcholki];              // Stos
-	int sptr = 0;							    // WskaŸnik stosu
+	d = new int[wierzcholki];              // Tablica kosztów dojœcia
+	p = new int[wierzcholki];              // Tablica poprzedników
+	bool *S = new bool[wierzcholki];           // Zbior S
 
 	// Inicjujemy tablice dynamiczne
 
@@ -71,7 +68,7 @@ void listaSasiadow::Dijkstra(int startowy)
 	{
 		d[i] = MAXINT;
 		p[i] = -1;
-		QS[i] = false;
+		S[i] = false;
 	}
 
 	d[startowy] = 0;							// Koszt dojœcia v jest zerowy
@@ -85,14 +82,14 @@ void listaSasiadow::Dijkstra(int startowy)
 		
 		// Szukamy wierzcho³ka w Q o najmniejszym koszcie d
 
-		for (j = 0; QS[j]; j++);
+		for (j = 0; S[j]; j++);
 		for (u = j++; j < wierzcholki; j++)
-			if (!QS[j] && (d[j] < d[u])) 
+			if (!S[j] && (d[j] < d[u])) 
 				u = j;
 
 		// Znaleziony wierzcho³ek przenosimy do S
 
-		QS[u] = true;
+		S[u] = true;
 
 		// Modyfikujemy odpowiednio wszystkich s¹siadów u, którzy s¹ w Q
 		bool z = tabList.at(u).empty();
@@ -106,7 +103,7 @@ void listaSasiadow::Dijkstra(int startowy)
 				{
 					advance(ith_iterator, index);
 					elListy& pw = *ith_iterator;
-					if (!QS[pw.elDocelowy] && (d[pw.elDocelowy] > d[u] + pw.waga))
+					if (!S[pw.elDocelowy] && (d[pw.elDocelowy] > d[u] + pw.waga))
 					{
 						d[pw.elDocelowy] = d[u] + pw.waga;
 						p[pw.elDocelowy] = u;
@@ -115,7 +112,7 @@ void listaSasiadow::Dijkstra(int startowy)
 				else
 				{
 					elListy& pw = tabList.at(u).back();
-					if (!QS[pw.elDocelowy] && (d[pw.elDocelowy] > d[u] + pw.waga))
+					if (!S[pw.elDocelowy] && (d[pw.elDocelowy] > d[u] + pw.waga))
 					{
 						d[pw.elDocelowy] = d[u] + pw.waga;
 						p[pw.elDocelowy] = u;
@@ -124,28 +121,33 @@ void listaSasiadow::Dijkstra(int startowy)
 			}
 		}
 	}
+}
+void listaSasiadow::DijkstraShow(int startowy)
+{
+	int *Stos = new int[wierzcholki];              // Stos
+	int sptr = 0;							    // WskaŸnik stosu
+
 	cout << endl << "Start = " << startowy << endl;
 	cout << "End   " << "Dist  " << "Path  " << endl;
 	//wyniki
 	for (int i = 0; i < wierzcholki; i++)
 	{
-		cout <<" "<< i << "  |   ";
+		cout << " " << i << "  |   ";
 
 		// Œcie¿kê przechodzimy od koñca ku pocz¹tkowi,
 		// Zapisuj¹c na stosie kolejne wierzcho³ki
 
-		for (int j = i; j > -1; j = p[j]) 
-			S[sptr++] = j;
-		
+		for (int j = i; j > -1; j = p[j])
+			Stos[sptr++] = j;
+
 		// Wypisujemy jej koszt
 
 		cout << d[i] << "  | ";
 		// Wyœwietlamy œcie¿kê, pobieraj¹c wierzcho³ki ze stosu
 
-		while (sptr) 
-			cout << S[--sptr] << " ";
+		while (sptr)
+			cout << Stos[--sptr] << " ";
 
 		cout << endl;
 	}
 }
-
