@@ -1,12 +1,10 @@
-﻿  macierzSasiedztwa.cpp
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(29): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(32): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(78): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(60): warning C4101: 'pw': unreferenced local variable
-  listaSasiadow.cpp
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\listasasiadow.cpp(34): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\listasasiadow.cpp(100): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\listasasiadow.cpp(102): warning C4018: '<': signed/unsigned mismatch
-c:\users\zlomek\desktop\projekt_2-grafy\projekt_2\grafy\grafy\listasasiadow.cpp(80): warning C4101: 'pw': unreferenced local variable
-  Generating Code...
-  Grafy.vcxproj -> C:\Users\Zlomek\Desktop\Projekt_2-Grafy\Projekt_2\Grafy\Debug\Grafy.exe
+﻿  listaSasiadow.cpp
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(34): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(100): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(102): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(80): warning C4101: 'pw': unreferenced local variable
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(216): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(218): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(251): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(192): warning C4101: 'pw': unreferenced local variable
+  Grafy.vcxproj -> C:\Users\Krzysiek\Desktop\git\Projekt_2\Grafy\Debug\Grafy.exe

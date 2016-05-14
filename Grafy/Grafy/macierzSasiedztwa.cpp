@@ -21,8 +21,6 @@ macierzSasiedztwa::macierzSasiedztwa(int wie, int kra, vector<elListy> dane)
 	{
 		macierz.at(dane.at(i).elPoczatkowy).at(dane.at(i).elDocelowy) = dane.at(i).waga;
 	}
-	d = new int[wierzcholki];
-	p = new int[wierzcholki]; 
 }
 void macierzSasiedztwa::showMatrix()
 {
@@ -38,6 +36,9 @@ void macierzSasiedztwa::showMatrix()
 }
 void macierzSasiedztwa::Dijkstra(int startowy)
 {
+	d = new int[wierzcholki];
+	p = new int[wierzcholki];
+
 	// Tworzymy tablice dynamiczne
 
 	bool *S = new bool[wierzcholki];           // Zbior S

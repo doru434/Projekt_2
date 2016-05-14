@@ -122,7 +122,7 @@ void listaSasiadow::Dijkstra(int startowy)
 		}
 	}
 }
-void listaSasiadow::DijkstraShow(int startowy)
+void listaSasiadow::ShowD(int startowy)
 {
 	int *Stos = new int[wierzcholki];              // Stos
 	int sptr = 0;							    // WskaŸnik stosu
@@ -150,4 +150,124 @@ void listaSasiadow::DijkstraShow(int startowy)
 
 		cout << endl;
 	}
+}
+void listaSasiadow::ShowF(int startowy, bool check)
+{
+	if (check)
+	{
+		int *Stos = new int[wierzcholki];              // Stos
+		int sptr = 0;							    // WskaŸnik stosu
+
+		cout << endl << "Start = " << startowy << endl;
+		cout << "End   " << "Dist  " << "Path  " << endl;
+		//wyniki
+		for (int i = 0; i < wierzcholki; i++)
+		{
+			cout << " " << i << "  |   ";
+
+			// Œcie¿kê przechodzimy od koñca ku pocz¹tkowi,
+			// Zapisuj¹c na stosie kolejne wierzcho³ki
+
+			for (int j = i; j > -1; j = p[j])
+				Stos[sptr++] = j;
+
+			// Wypisujemy jej koszt
+
+			cout << d2[i] << "  | ";
+			// Wyœwietlamy œcie¿kê, pobieraj¹c wierzcho³ki ze stosu
+
+			while (sptr)
+				cout << Stos[--sptr] << " ";
+
+			cout << endl;
+		}
+	}
+	else
+		cout << "Ujemny cykl!" << endl;
+}
+bool listaSasiadow::BellmanFord(int startowy)
+{
+	int i, x;
+	bool test;
+	elListy *pw;
+
+// Tworzymy tablice dynamiczne
+
+	d2 = new long long[wierzcholki];              // Tablica kosztów dojœcia
+	p = new int[wierzcholki];              // Tablica poprzedników
+
+ // Inicjujemy tablice dynamiczne
+
+	for (int i = 0; i < wierzcholki; i++)
+	{
+		d2[i] = MAXINT;
+		p[i] = -1;
+	}
+
+	d2[startowy] = 0;                       // Zerujemy koszt dojœcia do v
+
+	for (i = 1; i < wierzcholki; i++)          // Pêtla relaksacji
+	{
+		test = true;                  // Oznacza, ¿e algorytm nie wprowadzi³ zmian do d i p
+		for (x = 0; x < wierzcholki; x++) // Przechodzimy przez kolejne wierzcho³ki grafu
+		{
+			list<elListy>::iterator ith_iterator = tabList.at(x).begin();
+			int w = tabList.at(x).size();
+			for (int index = 0; index < tabList.at(x).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
+			{
+				if (index < tabList.at(x).size() - 1)
+				{
+					advance(ith_iterator, index);
+					elListy& pw = *ith_iterator;
+					if (d2[pw.elDocelowy] > d2[x] + pw.waga)		// Sprawdzamy warunek relaksacji
+					{
+						test = false;							// Jest zmiana w d i p
+						d2[pw.elDocelowy] = d2[x] + pw.waga;		// Relaksujemy krawêdŸ z x do jego s¹siada
+						p[pw.elDocelowy] = x;					// Poprzednikiem s¹siada bêdzie x
+					}
+				}
+				else
+				{
+					elListy& pw = tabList.at(x).back();
+					if (d2[pw.elDocelowy] > d2[x] + pw.waga)		// Sprawdzamy warunek relaksacji
+					{
+						test = false;							// Jest zmiana w d i p
+						d2[pw.elDocelowy] = d2[x] + pw.waga;		// Relaksujemy krawêdŸ z x do jego s¹siada
+						p[pw.elDocelowy] = x;					// Poprzednikiem s¹siada bêdzie x
+					}
+				}
+			}
+		}
+		if (test)
+			return true;         // Jeœli nie by³o zmian, to koñczymy
+	}
+
+	// Sprawdzamy istnienie ujemnego cyklu
+
+	for (x = 0; x < wierzcholki; x++)
+	{
+		list<elListy>::iterator ith_iterator = tabList.at(x).begin();
+		int w = tabList.at(x).size();
+		for (int index = 0; index < tabList.at(x).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
+		{
+			if (index < tabList.at(x).size() - 1)
+			{
+				advance(ith_iterator, index);
+				elListy& pw = *ith_iterator;
+				if (d[pw.elDocelowy] > d[x] + pw.waga)
+				{
+					return false; // ujemny cykl!!
+				}
+			}
+			else
+			{
+				elListy& pw = tabList.at(x).back();
+				if (d[pw.elDocelowy] > d[x] + pw.waga)
+				{
+					return false; // ujemny cykl!!
+				}
+			}
+		}
+	}
+	return true;
 }
