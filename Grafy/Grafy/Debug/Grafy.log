@@ -5,6 +5,11 @@ c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(102): warn
 c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(80): warning C4101: 'pw': unreferenced local variable
 c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(216): warning C4018: '<': signed/unsigned mismatch
 c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(218): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(251): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(250): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(252): warning C4018: '<': signed/unsigned mismatch
 c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(192): warning C4101: 'pw': unreferenced local variable
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(289): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(291): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(380): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(382): warning C4018: '<': signed/unsigned mismatch
   Grafy.vcxproj -> C:\Users\Krzysiek\Desktop\git\Projekt_2\Grafy\Debug\Grafy.exe
