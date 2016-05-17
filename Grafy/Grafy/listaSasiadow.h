@@ -28,6 +28,7 @@ private:
 
 public:
 	listaSasiadow(int wie,int kra,vector<elListy> &dane);
+	listaSasiadow(int wie, int kra, vector<elListy> &dane, int x);
 	void showElements();
 	void Dijkstra(int startowy);
 	void ShowD(int startowy);

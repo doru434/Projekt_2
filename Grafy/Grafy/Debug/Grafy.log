@@ -1,15 +1,38 @@
-﻿  listaSasiadow.cpp
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(34): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(100): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(102): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(80): warning C4101: 'pw': unreferenced local variable
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(216): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(218): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(250): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(252): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(192): warning C4101: 'pw': unreferenced local variable
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(289): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(291): warning C4018: '<': signed/unsigned mismatch
-c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(380): warning C4018: '<': signed/unsigned mismatch
+﻿  macierzSasiedztwa.cpp
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(28): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(31): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(80): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(62): warning C4101: 'pw': unreferenced local variable
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(187): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(210): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(163): warning C4101: 'pw': unreferenced local variable
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(236): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\macierzsasiedztwa.cpp(238): warning C4018: '<': signed/unsigned mismatch
+  listaSasiadow.cpp
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(63): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(127): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(129): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(154): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(156): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(108): warning C4101: 'pw': unreferenced local variable
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(276): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(278): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(305): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(307): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(340): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(342): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(247): warning C4101: 'pw': unreferenced local variable
 c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(382): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(384): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(400): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(402): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(497): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(500): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(525): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(530): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(549): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(552): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(577): warning C4018: '<': signed/unsigned mismatch
+c:\users\krzysiek\desktop\git\projekt_2\grafy\grafy\listasasiadow.cpp(582): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   Grafy.vcxproj -> C:\Users\Krzysiek\Desktop\git\Projekt_2\Grafy\Debug\Grafy.exe

@@ -24,6 +24,7 @@ macierzSasiedztwa::macierzSasiedztwa(int wie, int kra, vector<elListy> &dane)
 }
 void macierzSasiedztwa::showMatrix()
 {
+	cout << endl << endl << "MacierzSasiadow"<<endl;
 	for (int i = 0; i < macierz.size(); i++)
 	{
 		cout << "El[" << i << "] = ";
@@ -92,6 +93,7 @@ void macierzSasiedztwa::Dijkstra(int startowy)
 }
 void macierzSasiedztwa::DijkstraShow(int startowy)
 {
+	cout <<endl<< "Dijkstra dla macierzy";
 	int *Stos = new int[wierzcholki];              // Stos
 	int sptr = 0;							    // WskaŸnik stosu
 
@@ -121,6 +123,7 @@ void macierzSasiedztwa::DijkstraShow(int startowy)
 }
 void macierzSasiedztwa::ShowF(int startowy, bool check)
 {
+	cout <<endl<< "Bellman-Ford dla macierzy";
 	if (check)
 	{
 		int *Stos = new int[wierzcholki];              // Stos
@@ -223,7 +226,6 @@ bool compare2(elListy i, elListy j)
 }
 void macierzSasiedztwa::Kruskal(int startowy)
 {
-
 	int *tab = new int[wierzcholki];
 	for (int i = 0; i < wierzcholki; i++)
 	{
@@ -278,19 +280,23 @@ void macierzSasiedztwa::Kruskal(int startowy)
 		l_front++;
 	}
 
-	cout << "Dla macierzy:" << endl;
+	int mst = 0;
 	l_front = T.begin();
 	l_back = T.end();
 
+	cout << endl<<"Kruskal dla macierzy:" << endl;
+	cout << "Edge     Weight" << endl << endl;
 
-	cout << l_front->waga << " ";
+	cout << "(" << l_front->elPoczatkowy << "," << l_front->elDocelowy << ")" << "   " << l_front->waga << endl;
+	mst = mst + l_front->waga;
 	l_front++;
 	while (l_front != l_back)
 	{
 
-		cout << l_front->waga << " ";
+		cout << "(" << l_front->elPoczatkowy << "," << l_front->elDocelowy << ")" << "   " << l_front->waga << endl;
+		mst = mst + l_front->waga;
 		l_front++;
 	}
-	cout << endl;
+	cout << endl << "MST = " << mst << endl << endl;
 	
 }

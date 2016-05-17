@@ -5,22 +5,22 @@ int main()
 	bool check;
 	fileReader reader;
 	listaSasiadow sasiedzi(reader.data[0], reader.data[1], reader.tablica);
-	//sasiedzi.showElements();
-	//sasiedzi.Dijkstra(reader.data[2]);
-	//sasiedzi.DijkstraShow(reader.data[2]);
-	sasiedzi.Prime(reader.data[2]);
-	cout << endl << endl;
+	//listaSasiadow sasiedzi2(reader.data[0], reader.data[1], reader.tablica, reader.data[2]);
+	sasiedzi.showElements();
+	sasiedzi.Dijkstra(reader.data[2]);
+	sasiedzi.ShowD(reader.data[2]);
 
-	//cout << "FORD FORD FORD" << endl;
+	//sasiedzi2.Prime(reader.data[2]);
 
-	//check=sasiedzi.BellmanFord(reader.data[2]);
-	//sasiedzi.ShowF(reader.data[2],check);
+	check=sasiedzi.BellmanFord(reader.data[2]);
+	sasiedzi.ShowF(reader.data[2],check);
 
-	//sasiedzi.Kruskal(reader.data[2]);
+	sasiedzi.Kruskal(reader.data[2]);
+
 	macierzSasiedztwa macierz(reader.data[0], reader.data[1], reader.tablica);
 	macierz.showMatrix();
-	//macierz.Dijkstra(reader.data[2]);
-	//macierz.DijkstraShow(reader.data[2]);
+	macierz.Dijkstra(reader.data[2]);
+	macierz.DijkstraShow(reader.data[2]);
 	check = macierz.BellmanFord(reader.data[2]);
 	macierz.ShowF(reader.data[2], check);
 

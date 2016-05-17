@@ -25,8 +25,37 @@ listaSasiadow::listaSasiadow(int wie, int kra, vector<elListy> &dane)
 		}
 	}
 }
+listaSasiadow::listaSasiadow(int wie, int kra, vector<elListy> &dane,int x)
+{
+	wierzcholki = wie;
+	krawedzie = kra;
+
+
+	for (int i = 0; i < wierzcholki; i++)
+	{
+		list<elListy> row;
+		for (int j = 0; j < krawedzie; j++)
+		{
+			if (dane.at(j).elPoczatkowy == i)
+			{
+				row.push_back(dane.at(j));
+			}
+			else if (dane.at(j).elDocelowy == i)
+			{
+				row.push_back(dane.at(j));
+			}
+
+		}
+		if (row.size() != 0)
+		{
+			cout << "row.size(): " << row.size();
+			tabList.push_back(row);
+		}
+	}
+}
 void listaSasiadow::showElements()
 {
+	cout << endl << "Lista Sasiadow" << endl;
 	for (int i = 0; i < wierzcholki; i++)
 	{
 		cout << "El[" << i << "] = ";
@@ -60,9 +89,8 @@ void listaSasiadow::Dijkstra(int startowy)
 
 	d = new int[wierzcholki];              // Tablica kosztów dojœcia
 	p = new int[wierzcholki];              // Tablica poprzedników
-	bool *S = new bool[wierzcholki];           // Zbior S
+	bool *S = new bool[wierzcholki];       // Zbior S
 
-	// Inicjujemy tablice dynamiczne
 
 	for (int i = 0; i < wierzcholki; i++)
 	{
@@ -71,7 +99,7 @@ void listaSasiadow::Dijkstra(int startowy)
 		S[i] = false;
 	}
 
-	d[startowy] = 0;							// Koszt dojœcia v jest zerowy
+	d[startowy] = 0;							
 
 	// Wyznaczamy œcie¿ki
 
@@ -80,23 +108,49 @@ void listaSasiadow::Dijkstra(int startowy)
 		elListy pw;
 		int j, u,x=0;
 		
-		// Szukamy wierzcho³ka w Q o najmniejszym koszcie d
+		//zzukamy wierzcholka w Q o najmniejszym koszcie d
 
 		for (j = 0; S[j]; j++);
 		for (u = j++; j < wierzcholki; j++)
 			if (!S[j] && (d[j] < d[u])) 
 				u = j;
 
-		// Znaleziony wierzcho³ek przenosimy do S
+		//znaleziony wierzcho³ek przenosimy do S
 
 		S[u] = true;
-
-		// Modyfikujemy odpowiednio wszystkich s¹siadów u, którzy s¹ w Q
-		bool z = tabList.at(u).empty();
-		if (z==false)
+		list<elListy>::iterator ith_iterator;
+		// modyfikujemy odpowiednio wszystkich sasiadow u, ktorzy s¹ w Q
+		if (u==tabList.size())
 		{
-			list<elListy>::iterator ith_iterator = tabList.at(u).begin();
-			int w = tabList.at(u).size();
+			ith_iterator = tabList.back().begin();
+		
+			for (int index = 0; index < tabList.back().size(); index++)
+			{
+				if (index < tabList.back().size() - 1)
+				{
+					advance(ith_iterator, index);
+					elListy& pw = *ith_iterator;
+					if (!S[pw.elDocelowy] && (d[pw.elDocelowy] > d[u] + pw.waga))
+					{
+						d[pw.elDocelowy] = d[u] + pw.waga;
+						p[pw.elDocelowy] = u;
+					}
+				}
+				else
+				{
+					elListy& pw = tabList.back().back();
+					if (!S[pw.elDocelowy] && (d[pw.elDocelowy] > d[u] + pw.waga))
+					{
+						d[pw.elDocelowy] = d[u] + pw.waga;
+						p[pw.elDocelowy] = u;
+					}
+				}
+			}
+		}
+		else
+		{
+			ith_iterator = tabList.at(u).begin();
+
 			for (int index = 0; index < tabList.at(u).size(); index++)
 			{
 				if (index < tabList.at(u).size() - 1)
@@ -124,7 +178,8 @@ void listaSasiadow::Dijkstra(int startowy)
 }
 void listaSasiadow::ShowD(int startowy)
 {
-	int *Stos = new int[wierzcholki];              // Stos
+	cout <<endl<< "Dijkstra dla listy Sasiadow";
+	int *Stos = new int[wierzcholki];           // Stos
 	int sptr = 0;							    // WskaŸnik stosu
 
 	cout << endl << "Start = " << startowy << endl;
@@ -153,11 +208,11 @@ void listaSasiadow::ShowD(int startowy)
 }
 void listaSasiadow::ShowF(int startowy, bool check)
 {
+	cout << endl<<"Bellman-Ford dla listy Sasiadow";
 	if (check)
 	{
-		int *Stos = new int[wierzcholki];              // Stos
+		int *Stos = new int[wierzcholki];           // Stos
 		int sptr = 0;							    // WskaŸnik stosu
-
 		cout << endl << "Start = " << startowy << endl;
 		cout << "End   " << "Dist  " << "Path  " << endl;
 		//wyniki
@@ -211,29 +266,64 @@ bool listaSasiadow::BellmanFord(int startowy)
 		test = true;                  // Oznacza, ¿e algorytm nie wprowadzi³ zmian do d i p
 		for (x = 0; x < wierzcholki; x++) // Przechodzimy przez kolejne wierzcho³ki grafu
 		{
-			list<elListy>::iterator ith_iterator = tabList.at(x).begin();
-			int w = tabList.at(x).size();
-			for (int index = 0; index < tabList.at(x).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
+			list<elListy>::iterator ith_iterator;
+			// Modyfikujemy odpowiednio wszystkich s¹siadów u, którzy s¹ w Q
+			//bool z = tabList.at(u).empty();
+			if (x == tabList.size())
 			{
-				if (index < tabList.at(x).size() - 1)
+				ith_iterator = tabList.back().begin();
+
+				for (int index = 0; index < tabList.back().size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
 				{
-					advance(ith_iterator, index);
-					elListy& pw = *ith_iterator;
-					if (d2[pw.elDocelowy] > d2[x] + pw.waga)		// Sprawdzamy warunek relaksacji
+					if (index < tabList.back().size() - 1)
 					{
-						test = false;							// Jest zmiana w d i p
-						d2[pw.elDocelowy] = d2[x] + pw.waga;		// Relaksujemy krawêdŸ z x do jego s¹siada
-						p[pw.elDocelowy] = x;					// Poprzednikiem s¹siada bêdzie x
+						advance(ith_iterator, index);
+						elListy& pw = *ith_iterator;
+						if (d2[pw.elDocelowy] > d2[x] + pw.waga)	// Sprawdzamy warunek relaksacji
+						{
+							test = false;							
+							d2[pw.elDocelowy] = d2[x] + pw.waga;	// Relaksujemy krawêdŸ z x do jego s¹siada
+							p[pw.elDocelowy] = x;					// Poprzednikiem s¹siada bêdzie x
+						}
+					}
+					else
+					{
+						elListy& pw = tabList.back().back();
+						if (d2[pw.elDocelowy] > d2[x] + pw.waga)	// Sprawdzamy warunek relaksacji
+						{
+							test = false;							
+							d2[pw.elDocelowy] = d2[x] + pw.waga;	// Relaksujemy krawêdŸ z x do jego s¹siada
+							p[pw.elDocelowy] = x;					// Poprzednikiem s¹siada bêdzie x
+						}
 					}
 				}
-				else
+			}
+			else
+			{
+				ith_iterator = tabList.at(x).begin();
+
+				for (int index = 0; index < tabList.at(x).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
 				{
-					elListy& pw = tabList.at(x).back();
-					if (d2[pw.elDocelowy] > d2[x] + pw.waga)		// Sprawdzamy warunek relaksacji
+					if (index < tabList.at(x).size() - 1)
 					{
-						test = false;							// Jest zmiana w d i p
-						d2[pw.elDocelowy] = d2[x] + pw.waga;		// Relaksujemy krawêdŸ z x do jego s¹siada
-						p[pw.elDocelowy] = x;					// Poprzednikiem s¹siada bêdzie x
+						advance(ith_iterator, index);
+						elListy& pw = *ith_iterator;
+						if (d2[pw.elDocelowy] > d2[x] + pw.waga)	// Sprawdzamy warunek relaksacji
+						{
+							test = false;							
+							d2[pw.elDocelowy] = d2[x] + pw.waga;	// Relaksujemy krawêdŸ z x do jego s¹siada
+							p[pw.elDocelowy] = x;					// Poprzednikiem s¹siada bêdzie x
+						}
+					}
+					else
+					{
+						elListy& pw = tabList.at(x).back();
+						if (d2[pw.elDocelowy] > d2[x] + pw.waga)	// Sprawdzamy warunek relaksacji
+						{
+							test = false;							
+							d2[pw.elDocelowy] = d2[x] + pw.waga;	// Relaksujemy krawêdŸ z x do jego s¹siada
+							p[pw.elDocelowy] = x;					// Poprzednikiem s¹siada bêdzie x
+						}
 					}
 				}
 			}
@@ -283,21 +373,43 @@ void listaSasiadow::Kruskal(int startowy)
 		tab[i] = i;
 	}
 	list <elListy> L,T;
+	list<elListy>::iterator ith_iterator;
 	for (int x = 0; x < wierzcholki; x++)
 	{
-		list<elListy>::iterator ith_iterator = tabList.at(x).begin();
-		for (int index = 0; index < tabList.at(x).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
+		if (x == tabList.size())
 		{
-			if (index < tabList.at(x).size() - 1)
+			ith_iterator = tabList.back().begin();
+			for (int index = 0; index < tabList.back().size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
 			{
-				advance(ith_iterator, index);
-				elListy& pw = *ith_iterator;
-				L.push_back(pw);
+				if (index < tabList.back().size() - 1)
+				{
+					advance(ith_iterator, index);
+					elListy& pw = *ith_iterator;
+					L.push_back(pw);
+				}
+				else
+				{
+					elListy& pw = tabList.back().back();
+					L.push_back(pw);
+				}
 			}
-			else
+		}
+		else
+		{
+			ith_iterator = tabList.at(x).begin();
+			for (int index = 0; index < tabList.at(x).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
 			{
-				elListy& pw = tabList.at(x).back();
-				L.push_back(pw);
+				if (index < tabList.at(x).size() - 1)
+				{
+					advance(ith_iterator, index);
+					elListy& pw = *ith_iterator;
+					L.push_back(pw);
+				}
+				else
+				{
+					elListy& pw = tabList.at(x).back();
+					L.push_back(pw);
+				}
 			}
 		}
 	}
@@ -335,21 +447,24 @@ void listaSasiadow::Kruskal(int startowy)
 		}
 		l_front++;
 	}
-
-	cout << "Dla list:" << endl;
+	int mst=0;
 	l_front = T.begin();
 	l_back = T.end();
 
+	cout << endl<<"Kruskal dla list:" << endl;
+	cout << "Edge     Weight" << endl << endl;
 
-	cout << l_front->waga << " ";
+	cout << "(" << l_front->elPoczatkowy << "," << l_front->elDocelowy << ")" << "   " << l_front->waga << endl;
+	mst = mst + l_front->waga;
 	l_front++;
 	while (l_front != l_back)
 	{
 
-		cout << l_front->waga << " ";
+		cout << "(" << l_front->elPoczatkowy << "," << l_front->elDocelowy << ")" << "   " << l_front->waga << endl;
+		mst = mst + l_front->waga;
 		l_front++;
 	}
-	cout << endl;
+	cout << endl << "MST = " << mst << endl << endl;
 	
 }
 
@@ -363,9 +478,9 @@ void listaSasiadow::Prime(int startowy)
 {
 	bool *tab = new bool[wierzcholki];
 	list <elListy> T;
-	//std::priority_queue<elListy, std::vector<elListy>, greaterWeight> Q;
+
 	vector <elListy> v;
-	elListy z;
+	elListy z,temp;
 
 	for (int i = 0; i < wierzcholki; i++)
 	{
@@ -373,40 +488,113 @@ void listaSasiadow::Prime(int startowy)
 	}
 
 	tab[startowy] = true;
-
+	list<elListy>::iterator ith_iterator;
 	for (int x = 0; x < wierzcholki -1 ; x++)
 	{
-		list<elListy>::iterator ith_iterator = tabList.at(x).begin();
-		for (int index = 0; index < tabList.at(x).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
+		if (startowy == tabList.size())
 		{
-			if (index < tabList.at(x).size() - 1)
+			ith_iterator = tabList.back().begin();
+			for (int index = 0; index < tabList.back().size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
 			{
-				advance(ith_iterator, index);
-				elListy& pw = *ith_iterator;
-				if (!tab[pw.elDocelowy])
+				//cout << endl << "tabList.at(startowy).size(): " << tabList.back().size() << endl;
+				if (index < tabList.back().size() - 1)
 				{
-					v.push_back(pw);
+					advance(ith_iterator, index);
+					elListy& pw = *ith_iterator;
+					if (!tab[pw.elDocelowy])
+					{
+						z.elPoczatkowy = startowy;                 // to tworzymy krawêdŸ
+						z.elDocelowy = pw.elDocelowy;
+						z.waga = pw.waga;
+						v.push_back(z);
+					}
+				}
+				else
+				{
+					elListy& pw = tabList.back().back();
+					if (!tab[pw.elDocelowy])
+					{
+						z.elPoczatkowy = startowy;
+						z.elDocelowy = pw.elDocelowy;
+						z.waga = pw.waga;
+						v.push_back(z);
+					}
 				}
 			}
-			else
+			sort(v.begin(), v.end(), myobject);
+			for (int i = 0; i < v.size(); i++)
 			{
-				elListy& pw = tabList.at(x).back();
-				if (!tab[pw.elDocelowy])          // Jeœli s¹siad jest nieodwiedzony,
+				cout << ":" << v.at(i).waga;
+			}
+			cout << endl;
+			for (int i = 0; i < v.size(); i++)
+			{
+				z = v.at(i);
+				if (!tab[z.elDocelowy])
 				{
-					v.push_back(pw);                // Dodajemy j¹ do kolejki priorytetowej
+					temp = v.at(v.size() - 1);
+					v.at(v.size() - 1) = v.at(i);
+					v.at(i) = temp;
+					v.pop_back();
+					break;
 				}
 			}
+			T.push_back(z);
+			startowy = z.elDocelowy;
+			tab[z.elDocelowy] = true;
 		}
-		cout << "v.size(): " << v.size() << " top: " << Q.top().waga << endl;
-		sort(v.begin(), v.end(), myobject);
-		do
+		else
 		{
-			z = Q.top();              // Pobieramy krawêdŸ z kolejki
-			Q.pop();
-		} while (tab[z.elDocelowy]);       // KrawêdŸ prowadzi poza drzewo?
-		T.push_back(z);
-
-		tab[z.elDocelowy] = true;         // Oznaczamy drugi wierzcho³ek jako odwiedzony
+			ith_iterator = tabList.at(startowy).begin();
+			for (int index = 0; index < tabList.at(startowy).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
+			{
+				//cout << endl << "tabList.at(startowy).size(): " << tabList.at(startowy).size() << endl;
+				if (index < tabList.at(startowy).size() - 1)
+				{
+					advance(ith_iterator, index);
+					elListy& pw = *ith_iterator;
+					if (!tab[pw.elDocelowy])
+					{
+						z.elPoczatkowy = startowy;                 // to tworzymy krawêdŸ
+						z.elDocelowy = pw.elDocelowy;
+						z.waga = pw.waga;
+						v.push_back(z);
+					}
+				}
+				else
+				{
+					elListy& pw = tabList.at(startowy).back();
+					if (!tab[pw.elDocelowy])
+					{
+						z.elPoczatkowy = startowy;
+						z.elDocelowy = pw.elDocelowy;
+						z.waga = pw.waga;
+						v.push_back(z);
+					}
+				}
+			}
+			sort(v.begin(), v.end(), myobject);
+			for (int i = 0; i < v.size(); i++)
+			{
+				cout << ":" << v.at(i).waga;
+			}
+			cout << endl;
+			for (int i = 0; i < v.size(); i++)
+			{
+				z = v.at(i);
+				if (!tab[z.elDocelowy])
+				{
+					temp = v.at(v.size() - 1);
+					v.at(v.size() - 1) = v.at(i);
+					v.at(i) = temp;
+					v.pop_back();
+					break;
+				}
+			}
+			T.push_back(z);
+			startowy = z.elDocelowy;
+			tab[z.elDocelowy] = true;
+		}
 	}
 
 	cout << "Dla list(prime):" << endl;
