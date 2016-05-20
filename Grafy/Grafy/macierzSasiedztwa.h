@@ -15,11 +15,13 @@ private:
 
 public:
 	macierzSasiedztwa(int wie, int kra, vector<elListy> &dane);
+	macierzSasiedztwa(int wie, int kra, vector<elListy> &dane, int data);
 	void showMatrix();
 	void Dijkstra(int startowy);
 	void DijkstraShow(int startowy);
 	bool BellmanFord(int startowy);
 	void ShowF(int startowy, bool check);
 	void Kruskal(int startowy);
+	void Prime(int startowy);
 };
 

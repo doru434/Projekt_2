@@ -22,6 +22,27 @@ macierzSasiedztwa::macierzSasiedztwa(int wie, int kra, vector<elListy> &dane)
 		macierz.at(dane.at(i).elPoczatkowy).at(dane.at(i).elDocelowy) = dane.at(i).waga;
 	}
 }
+macierzSasiedztwa::macierzSasiedztwa(int wie, int kra, vector<elListy> &dane, int data)
+{
+	wierzcholki = wie;
+	krawedzie = kra;
+
+	for (int i = 0; i < wierzcholki; i++)
+	{
+		vector<int> row;
+		for (int j = 0; j < wierzcholki; j++)
+		{
+			row.push_back(0);
+		}
+		macierz.push_back(row);
+	}
+
+	for (int i = 0; i < krawedzie; i++)
+	{
+		macierz.at(dane.at(i).elPoczatkowy).at(dane.at(i).elDocelowy) = dane.at(i).waga;
+		macierz.at(dane.at(i).elDocelowy).at(dane.at(i).elPoczatkowy) = dane.at(i).waga;
+	}
+}
 void macierzSasiedztwa::showMatrix()
 {
 	cout << endl << endl << "MacierzSasiadow"<<endl;
@@ -299,4 +320,88 @@ void macierzSasiedztwa::Kruskal(int startowy)
 	}
 	cout << endl << "MST = " << mst << endl << endl;
 	
+}
+struct myclass {
+	bool operator() (elListy i, elListy j)
+	{
+		return (i.waga<j.waga);
+	}
+} myobject2;
+void macierzSasiedztwa::Prime(int startowy)
+{
+	bool *tab = new bool[wierzcholki];
+	list <elListy> T;
+
+	vector <elListy> v;
+	elListy z, temp;
+
+	for (int i = 0; i < wierzcholki; i++)
+	{
+		tab[i] = false;
+	}
+
+	tab[startowy] = true;
+
+
+	cout << endl << "Macierz" << endl;
+
+	for (int i = 1; i < wierzcholki; i++)
+	{
+
+		for (int j = 0; j < macierz.at(i).size(); j++)
+		{
+			if (!tab[j] && macierz.at(i).at(j) != 0)
+			{
+				z.elPoczatkowy = startowy;                 // to tworzymy krawêdŸ
+				z.elDocelowy = j;
+				z.waga = macierz.at(i).at(j);
+				v.push_back(z);
+			}
+		}
+
+		sort(v.begin(), v.end(), myobject2);
+		for (int i = 0; i < v.size(); i++)
+		{
+			cout << ":" << v.at(i).waga;
+		}
+		cout << endl;
+		for (int i = 0; i < v.size(); i++)
+		{
+			z = v.at(i);
+			if (!tab[z.elDocelowy])
+			{
+				temp = v.at(v.size() - 1);
+				v.at(v.size() - 1) = v.at(i);
+				v.at(i) = temp;
+				v.pop_back();
+				break;
+			}
+		}
+		T.push_back(z);
+		startowy = z.elDocelowy;
+		tab[z.elDocelowy] = true;
+
+
+		cout << endl;
+		
+	}
+
+	cout << "Dla list(prime):" << endl;
+	std::list<elListy>::const_iterator l_front = T.begin();
+	std::list<elListy>::const_iterator l_back = T.end();
+
+
+	cout << "waga: " << l_front->waga << " ";
+	cout << "powczatkowy: " << l_front->elPoczatkowy << " ";
+	cout << "docelowy: " << l_front->elDocelowy << endl;
+	l_front++;
+	while (l_front != l_back)
+	{
+
+		cout << "waga: " << l_front->waga << " ";
+		cout << "powczatkowy: " << l_front->elPoczatkowy << " ";
+		cout << "docelowy: " << l_front->elDocelowy << endl;
+		l_front++;
+	}
+	cout << endl;
 }

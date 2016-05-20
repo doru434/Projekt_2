@@ -29,7 +29,7 @@ listaSasiadow::listaSasiadow(int wie, int kra, vector<elListy> &dane,int x)
 {
 	wierzcholki = wie;
 	krawedzie = kra;
-
+	elListy z;
 
 	for (int i = 0; i < wierzcholki; i++)
 	{
@@ -42,13 +42,15 @@ listaSasiadow::listaSasiadow(int wie, int kra, vector<elListy> &dane,int x)
 			}
 			else if (dane.at(j).elDocelowy == i)
 			{
-				row.push_back(dane.at(j));
+				z.elPoczatkowy = dane.at(j).elDocelowy;
+				z.elDocelowy = dane.at(j).elPoczatkowy;
+				z.waga = dane.at(j).waga;
+				row.push_back(z);
 			}
 
 		}
 		if (row.size() != 0)
 		{
-			cout << "row.size(): " << row.size();
 			tabList.push_back(row);
 		}
 	}
@@ -474,13 +476,14 @@ struct myclass {
 		return (i.waga<j.waga); 
 	}
 } myobject;
+
 void listaSasiadow::Prime(int startowy)
 {
 	bool *tab = new bool[wierzcholki];
 	list <elListy> T;
 
 	vector <elListy> v;
-	elListy z,temp;
+	elListy z, temp;
 
 	for (int i = 0; i < wierzcholki; i++)
 	{
@@ -488,38 +491,39 @@ void listaSasiadow::Prime(int startowy)
 	}
 
 	tab[startowy] = true;
-	list<elListy>::iterator ith_iterator;
-	for (int x = 0; x < wierzcholki -1 ; x++)
+
+
+	cout << endl << "Lista Sasiadow" << endl;
+	
+	for (int i = 1; i < wierzcholki; i++)
 	{
-		if (startowy == tabList.size())
-		{
-			ith_iterator = tabList.back().begin();
-			for (int index = 0; index < tabList.back().size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
+			list <elListy> a = tabList.at(startowy);
+
+			std::list<elListy>::const_iterator l_front = a.begin();
+			std::list<elListy>::const_iterator l_back = a.end();
+
+
+			elListy pw = *l_front;
+			if (!tab[pw.elDocelowy])
 			{
-				//cout << endl << "tabList.at(startowy).size(): " << tabList.back().size() << endl;
-				if (index < tabList.back().size() - 1)
+				z.elPoczatkowy = startowy;                 // to tworzymy krawêdŸ
+				z.elDocelowy = pw.elDocelowy;
+				z.waga = pw.waga;
+				v.push_back(z);
+			}
+			l_front++;
+
+			while (l_front != l_back)
+			{						
+				elListy pw = *l_front;
+				if (!tab[pw.elDocelowy])
 				{
-					advance(ith_iterator, index);
-					elListy& pw = *ith_iterator;
-					if (!tab[pw.elDocelowy])
-					{
-						z.elPoczatkowy = startowy;                 // to tworzymy krawêdŸ
-						z.elDocelowy = pw.elDocelowy;
-						z.waga = pw.waga;
-						v.push_back(z);
-					}
+					z.elPoczatkowy = startowy;                 // to tworzymy krawêdŸ
+					z.elDocelowy = pw.elDocelowy;
+					z.waga = pw.waga;
+					v.push_back(z);
 				}
-				else
-				{
-					elListy& pw = tabList.back().back();
-					if (!tab[pw.elDocelowy])
-					{
-						z.elPoczatkowy = startowy;
-						z.elDocelowy = pw.elDocelowy;
-						z.waga = pw.waga;
-						v.push_back(z);
-					}
-				}
+				l_front++;
 			}
 			sort(v.begin(), v.end(), myobject);
 			for (int i = 0; i < v.size(); i++)
@@ -542,59 +546,10 @@ void listaSasiadow::Prime(int startowy)
 			T.push_back(z);
 			startowy = z.elDocelowy;
 			tab[z.elDocelowy] = true;
-		}
-		else
-		{
-			ith_iterator = tabList.at(startowy).begin();
-			for (int index = 0; index < tabList.at(startowy).size(); index++)	// Przegl¹damy listê s¹siadów wierzcho³ka x
-			{
-				//cout << endl << "tabList.at(startowy).size(): " << tabList.at(startowy).size() << endl;
-				if (index < tabList.at(startowy).size() - 1)
-				{
-					advance(ith_iterator, index);
-					elListy& pw = *ith_iterator;
-					if (!tab[pw.elDocelowy])
-					{
-						z.elPoczatkowy = startowy;                 // to tworzymy krawêdŸ
-						z.elDocelowy = pw.elDocelowy;
-						z.waga = pw.waga;
-						v.push_back(z);
-					}
-				}
-				else
-				{
-					elListy& pw = tabList.at(startowy).back();
-					if (!tab[pw.elDocelowy])
-					{
-						z.elPoczatkowy = startowy;
-						z.elDocelowy = pw.elDocelowy;
-						z.waga = pw.waga;
-						v.push_back(z);
-					}
-				}
-			}
-			sort(v.begin(), v.end(), myobject);
-			for (int i = 0; i < v.size(); i++)
-			{
-				cout << ":" << v.at(i).waga;
-			}
+
+			
 			cout << endl;
-			for (int i = 0; i < v.size(); i++)
-			{
-				z = v.at(i);
-				if (!tab[z.elDocelowy])
-				{
-					temp = v.at(v.size() - 1);
-					v.at(v.size() - 1) = v.at(i);
-					v.at(i) = temp;
-					v.pop_back();
-					break;
-				}
-			}
-			T.push_back(z);
-			startowy = z.elDocelowy;
-			tab[z.elDocelowy] = true;
-		}
+		
 	}
 
 	cout << "Dla list(prime):" << endl;
@@ -602,9 +557,9 @@ void listaSasiadow::Prime(int startowy)
 	std::list<elListy>::const_iterator l_back = T.end();
 
 
-	cout <<"waga: "<< l_front->waga << " ";
-	cout <<"powczatkowy: "<< l_front->elPoczatkowy << " ";
-	cout <<"docelowy: "<< l_front->elDocelowy << endl;
+	cout << "waga: " << l_front->waga << " ";
+	cout << "powczatkowy: " << l_front->elPoczatkowy << " ";
+	cout << "docelowy: " << l_front->elDocelowy << endl;
 	l_front++;
 	while (l_front != l_back)
 	{
