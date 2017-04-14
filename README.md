@@ -1,2 +1,2 @@
-# Projekt_2
+# Projekt_2 v2
 sdizo-grafy
